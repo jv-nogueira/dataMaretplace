@@ -33,7 +33,7 @@ function nextItem() {
       const city = listItem.children[0].children[0].children[0].children[0].children[0].children[0].children[0].children[0].children[0].children[1].children[2].innerText  || "Não encontrado";
 
       // Adiciona como uma linha ao array de dados
-      data.push([i,img, URL, price, title, city]);
+      data.push([i,'=image("'+img+'";1)',img, URL, price, title, city]);
     } catch (error) {
       console.error(`Erro ao processar o item ${i}:`, error);
 
@@ -53,7 +53,7 @@ function nextItem() {
 // Função para criar e salvar o arquivo .txt
 function salvarComoTxt(dados) {
   // Converte os dados em texto com separadores de tabulação (\t) e nova linha (\n)
-  const cabecalho = "Index\tImagem\tAnúncio\tPreço\tTítulo\tCidade\n";
+  const cabecalho = "Index\tImagem\tLink da imagem\tAnúncio\tPreço\tTítulo\tCidade\n";
   const texto = cabecalho + dados.map(linha => linha.join("\t")).join("\n");
 
   // Cria o Blob com o texto
