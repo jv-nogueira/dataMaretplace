@@ -1,20 +1,24 @@
 const data = [];
 let i = 0;
 
-// Todos os itens
-const allItems = document.querySelectorAll("[style='max-width: 381px; min-width: 242px;']");
-// Último item da lista
-const lastItem = allItems.length;
-
 nextItem();
 
 function nextItem() {
-  if (i < lastItem) {
-    // Seleciona o item atual da lista
-    const listItem = allItems[i];
+    // Todos os itens
+    const allItems = document.querySelectorAll("[style='max-width: 381px; min-width: 242px;']");
+    // Último item da lista
+    const lastItem = allItems.length;
+    if(lastItem == 0){
+        window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+        setTimeout(nextItem,4000) 
+        console.log("O lastItem é "+lastItem)
+    }else if (i < lastItem) {
+        // Seleciona o item atual da lista
+        const listItem = allItems[i];
 
-    // Barra de rolagem acompanha o loop pelos itens
-    listItem.scrollIntoView();
+        // Barra de rolagem acompanha o loop pelos itens
+        allItems[i].scrollIntoView({ behavior: "smooth" });
+        
 
     try {
       // Link da imagem
@@ -33,7 +37,7 @@ function nextItem() {
       const city = listItem.children[0].children[0].children[0].children[0].children[0].children[0].children[0].children[0].children[0].children[1].children[2].innerText  || "Não encontrado";
 
       // Adiciona como uma linha ao array de dados
-      data.push([i,'=image("'+img+'";1)',img, URL, price, title, city]);
+      data.push([i,'=image("'+img+'";1)', title, price, city, URL,img]);
     } catch (error) {
       console.error(`Erro ao processar o item ${i}:`, error);
 
@@ -43,7 +47,11 @@ function nextItem() {
 
     // Incrementa o índice e chama a próxima iteração
     i++;
-    setTimeout(nextItem,50) // Adiciona um pequeno delay para evitar sobrecarga
+    if(i <= lastItem-8){
+        setTimeout(nextItem,100) // Pequeno delay para evitar sobrecarga
+    } else {
+        setTimeout(nextItem,2000) // Delay maior para aguardar o carregamento do próximo item
+    }
   } else {
     console.log(data);
     salvarComoTxt(data);
@@ -53,7 +61,7 @@ function nextItem() {
 // Função para criar e salvar o arquivo .txt
 function salvarComoTxt(dados) {
   // Converte os dados em texto com separadores de tabulação (\t) e nova linha (\n)
-  const cabecalho = "Index\tImagem\tLink da imagem\tAnúncio\tPreço\tTítulo\tCidade\n";
+  const cabecalho = "Index\tImagem\tTítulo\tPreço\tCidade\tAnúncio\tLink da imagem\n";
   const texto = cabecalho + dados.map(linha => linha.join("\t")).join("\n");
 
   // Cria o Blob com o texto
