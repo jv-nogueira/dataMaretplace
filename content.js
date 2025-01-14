@@ -61,7 +61,7 @@ function nextItem() {
 // Função para criar e salvar o arquivo .txt
 function salvarComoTxt(dados) {
   // Converte os dados em texto com separadores de tabulação (\t) e nova linha (\n)
-  const cabecalho = "Index\tImagem\tTítulo\tPreço\tCidade\tAnúncio\tLink da imagem\n";
+  const cabecalho = "Index\tImagem\tTítulo\tPreço\tCidade\tAnúncio\tLink da imagem\tStatus\tMotivo\n";
   const texto = cabecalho + dados.map(linha => linha.join("\t")).join("\n");
 
   // Cria o Blob com o texto
