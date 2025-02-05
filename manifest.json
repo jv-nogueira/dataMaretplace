@@ -1,0 +1,24 @@
+{
+    "manifest_version": 3,
+    "name": "Scraper Mercado Livre",
+    "version": "1.0",
+    "description": "Coleta dados de produtos no Mercado Livre e os salva em um arquivo.",
+    "permissions": ["activeTab", "scripting", "storage"],
+    "background": {
+      "service_worker": "background.js"
+    },
+    "content_scripts": [
+      {
+        "matches": ["*://*.mercadolivre.com.br/*"],
+        "js": ["content.js"],
+        "run_at": "document_end"
+      }
+    ],
+    "host_permissions": [
+      "*://*.mercadolivre.com.br/*"
+    ],
+    "action": {
+      "default_title": "Iniciar Scraper"
+    }
+  }
+  
