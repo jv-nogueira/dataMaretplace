@@ -45,24 +45,23 @@ function nextItem() {
             const URL = itemList.children[0]?.children[0]?.children[1]?.children[0]?.children[0]?.href || "Não encontrado";
             
             // Adiciona como uma linha ao array de dados
-            data.push([i + 1, '=image("' + img + '";1)', title, price, URL, img]);
+            data.push(['=image("' + img + '";1)', title, price, URL, img]);
         } catch (error) {
             console.error(`Erro ao processar o item ${i}:`, error);
-            data.push([i + 1, "Erro ao obter imagem", "Erro ao obter título", "Erro ao obter preço", "Erro ao obter link"]);
+            data.push(["Erro ao obter imagem", "Erro ao obter título", "Erro ao obter preço", "Erro ao obter link"]);
         }
         
         // Incrementa o índice e chama a próxima iteração
         i++;
         setTimeout(nextItem, 200);
     } else {
-        console.log(data);
         salvarComoTxt(data);
     }
 }
 
 // Função para criar e salvar o arquivo .txt
 function salvarComoTxt(dados) {
-    const cabecalho = "Index\tImagem\tTítulo\tPreço\tAnúncio\tLink da imagem\n";
+    const cabecalho = "Imagem\tTítulo\tPreço\tAnúncio\tLink da imagem\n";
     const texto = cabecalho + dados.map(linha => linha.join("\t")).join("\n");
     
     const blob = new Blob([texto], { type: "text/plain" });
