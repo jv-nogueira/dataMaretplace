@@ -1,0 +1,12 @@
+{
+  "name": "Extrator do marketplace do Facebook",
+  "manifest_version": 3,
+  "version": "1.0",
+  "action": {
+    "default_popup": "popup.html"
+  },
+    "icons": { 
+        "48": "icons/filter.png"
+},
+  "permissions": ["activeTab", "scripting"]
+}
