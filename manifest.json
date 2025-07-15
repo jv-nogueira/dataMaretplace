@@ -1,9 +1,12 @@
 {
     "manifest_version": 3,
-    "name": "Scraper Mercado Livre",
+    "name": "Extrator de anúncios do ML",
     "version": "1.0",
-    "description": "Coleta dados de produtos no Mercado Livre e os salva em um arquivo.",
+    "description": "Salva em planilha as informações da lista de produtos do Mercado Livre",
     "permissions": ["activeTab", "scripting", "storage"],
+    "icons": { 
+      "48": "icons/shopping.png"
+    },
     "background": {
       "service_worker": "background.js"
     },

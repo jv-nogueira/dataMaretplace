@@ -5,7 +5,7 @@ if (!window.hasRun) {
     let i = 0;
   
     function nextItem() {
-      const allItems = document.querySelectorAll("[id='results']")[0]?.parentElement?.parentElement?.children[6]?.children;
+      const allItems = document.querySelectorAll("#root-app ol")[1].children;
   
       if (!allItems || allItems.length === 0) {
         window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
@@ -19,24 +19,21 @@ if (!window.hasRun) {
   
         try {
           let img = "Não encontrado";
-          if (itemList.children[0]?.children[0]?.children[0]?.children[2]?.src) {
-            img = itemList.children[0].children[0].children[0].children[2].src;
-          } else if (itemList.children[0]?.children[0]?.children[0]?.children[1]?.src) {
-            img = itemList.children[0].children[0].children[0].children[1].src;
+          if (document.querySelectorAll("#root-app ol")[1]?.querySelectorAll("img")[i].src) {
+            img = document.querySelectorAll("#root-app ol")[1]?.querySelectorAll("img")[i].src;
           }
   
-          const title = itemList.children[0]?.children[0]?.children[1]?.children[0]?.textContent?.trim() || "Não encontrado";
-          let price = "Não encontrado";
+          const title = document.querySelectorAll("#root-app ol")[1]?.querySelectorAll("h3")[i].textContent || "Não encontrado";
+
+          let price = [...document.querySelectorAll("#root-app ol")[1].children[i].querySelectorAll("*")].filter(el => {
+            for (const attr of el.attributes) {
+              if (attr.value.toLowerCase().includes("superscript")) return true;
+            }
+            return false;
+          })[0].textContent || "Não encontrado";
+
   
-          if (itemList.children[0]?.children[0]?.children[1]?.children[1]?.className.includes("price")) {
-            price = itemList.children[0]?.children[0]?.children[1]?.children[1]?.children[0]?.textContent;
-          } else if (itemList.children[0]?.children[0]?.children[1]?.children[2]?.className.includes("price")) {
-            price = itemList.children[0]?.children[0]?.children[1]?.children[2]?.children[0]?.textContent;
-          } else if (itemList.children[0]?.children[0]?.children[1]?.children[3]?.className.includes("price")) {
-            price = itemList.children[0]?.children[0]?.children[1]?.children[3]?.children[0]?.textContent;
-          }
-  
-          const URL = itemList.children[0]?.children[0]?.children[1]?.children[0]?.children[0]?.href || "Não encontrado";
+          const URL = document.querySelectorAll("#root-app ol")[1]?.querySelectorAll("h3")[i].children[0].href || "Não encontrado";
   
           data.push(['=image("' + img + '";1)', title, price, URL, img]);
         } catch (error) {
